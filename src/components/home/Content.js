@@ -6,7 +6,7 @@ const Content = () => {
     <div className="dark:bg-gray-800 pb-16">
       <div className="container mx-auto w-11/12 md:w-7/12">
         <div className="text-2xl font-bold pt-12 uppercase text-center tracking-widest">
-          <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white border-white">
+          <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white dark:border-white">
             {"</>"}
           </span>
         </div>

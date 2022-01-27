@@ -6,7 +6,7 @@ const About = () => {
       <div className="dark:bg-gray-800 pb-16">
         <div className="container w-7/12 mx-auto">
           <div className="text-2xl font-bold pt-12 uppercase text-center tracking-widest">
-            <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white border-white">
+            <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white dark:border-white">
               About
             </span>
           </div>
