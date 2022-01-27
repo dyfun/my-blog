@@ -1,16 +1,20 @@
 import React from "react";
+import { useParams } from "react-router-dom";
+import Thumb from "../../images/thumb.jpg";
 
-const About = () => {
+const Single = () => {
+  const { slug } = useParams();
   return (
     <>
       <div className="dark:bg-gray-800 pb-16">
-        <div className="container w-7/12 mx-auto">
-          <div className="text-2xl font-bold pt-12 uppercase text-center tracking-widest">
+        <div className="container mx-auto w-11/12 sm:w-7/12 ">
+          <div className="text-xl font-bold pt-12 uppercase text-center tracking-widest md:text-2xl">
             <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white border-white">
-              About
+              What is Lorem Ipsum
             </span>
           </div>
-          <div className="mt-16 p-12 shadow-xl dark:bg-gray-700">
+          <img src={Thumb} className="mt-12 mx-auto w-7/12" />
+          <div className="mt-4 p-12 shadow-xl sm:mt-6 dark:bg-gray-700">
             <div className="pt-6 text-md leading-8 text-post-text dark:text-white">
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -56,4 +60,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default Single;

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="text-center mt-10 mb-3 text-gray-500 uppercase text-sm">
+    <div className="text-center py-5 text-gray-500 uppercase text-sm dark:bg-gray-900">
       info@tayfunguler.org
     </div>
   );
