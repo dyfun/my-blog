@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import {useState} from "react";
 import Moon from "../../images/moon.svg";
 import Search from "../../images/search.svg";
 
