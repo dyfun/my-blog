@@ -16,7 +16,7 @@ const Single = ({ post, fetchPost }) => {
         <div className="dark:bg-gray-800 pb-16"> 
           <div className="container mx-auto w-11/12 sm:w-7/12 ">
             <div className="text-xl font-bold pt-12 uppercase text-center tracking-widest md:text-2xl">
-              <span className="border-solid border-b-2 border-post-bg pb-5 dark:text-white dark:border-white">
+              <span className="border-solid border-b-2 border-post-bg dark:text-white dark:border-white">
                 {post.title}
               </span>
             </div>

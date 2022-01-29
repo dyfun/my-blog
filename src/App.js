@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ContentContext } from "./contexts/Content/ContentContext";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
@@ -9,19 +9,34 @@ import Contact from "./components/contact/Contact";
 import Single from "./components/single/Single";
 
 function App() {
-  const { posts, fetchPosts, fetchPost, post } = useContext(ContentContext);
+  const { maxLimit, posts, fetchPosts, fetchPost, post } =
+    useContext(ContentContext);
+  const [limit, setLimit] = useState(4);
 
-  let status = false;
-  if (posts) {
-    status = true;
-  }
-  useEffect(() => fetchPosts(), []);
+  const newLimit = () => {
+    if (limit <= maxLimit) {
+      setLimit(limit + 4);
+    } else {
+      setLimit(maxLimit);
+    }
+  };
+  useEffect(() => fetchPosts(limit), [maxLimit, limit]);
 
   return (
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              posts={posts}
+              newLimit={newLimit}
+              maxLimit={maxLimit}
+              limit={limit}
+            />
+          }
+        />
         <Route
           path="/:slug"
           element={<Single posts={posts} fetchPost={fetchPost} post={post} />}

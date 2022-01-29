@@ -10,6 +10,11 @@ export const ContentReducer = (state, action) => {
             ...state,
             post: action.post,
           };
+          case "MAX_LIMIT":
+            return {
+              ...state,
+              maxLimit: action.maxLimit,
+            };
         /*case "SET_POST":
           return {
             ...state,

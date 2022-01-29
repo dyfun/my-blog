@@ -8,16 +8,27 @@ const ContentContextProvider = ({ children }) => {
   const initialState = {
     posts: null,
     post: null,
+    maxLimit: null,
   };
   const [state, dispatch] = useReducer(ContentReducer, initialState);
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (limit) => {
     try {
-      const posts = await axios.get("https://tayfunguler.org/api/posts");
-      dispatch({
-        type: "GET_POSTS",
-        posts: posts.data,
-      });
+      if (!state.maxLimit) {
+        const posts = await axios.get("https://tayfunguler.org/api/posts/1");
+        dispatch({
+          type: "MAX_LIMIT",
+          maxLimit: posts.data.length,
+        });
+      } else {
+        const posts = await axios.get(
+          "https://tayfunguler.org/api/posts/" + limit
+        );
+        dispatch({
+          type: "GET_POSTS",
+          posts: posts.data,
+        });
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -25,8 +36,8 @@ const ContentContextProvider = ({ children }) => {
 
   const fetchPost = async (slug) => {
     try {
-      const post = await axios.get("https://tayfunguler.org/api/post/"+slug);
-      
+      const post = await axios.get("https://tayfunguler.org/api/post/" + slug);
+
       dispatch({
         type: "GET_POST",
         post: post.data,
@@ -51,6 +62,7 @@ const ContentContextProvider = ({ children }) => {
       value={{
         posts: state.posts,
         post: state.post,
+        maxLimit: state.maxLimit,
         fetchPosts,
         fetchPost,
         //selectedPost: state.selectedPost,
