@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { ContentContext } from "./contexts/Content/ContentContext";
 import Header from "./components/layouts/Header";
 import Footer from "./components/layouts/Footer";
@@ -11,16 +11,6 @@ import Single from "./components/single/Single";
 function App() {
   const { maxLimit, posts, fetchPosts, fetchPost, post } =
     useContext(ContentContext);
-  const [limit, setLimit] = useState(4);
-
-  const newLimit = () => {
-    if (limit <= maxLimit) {
-      setLimit(limit + 4);
-    } else {
-      setLimit(maxLimit);
-    }
-  };
-  useEffect(() => fetchPosts(limit), [maxLimit, limit]);
 
   return (
     <>
@@ -29,12 +19,7 @@ function App() {
         <Route
           path="/"
           element={
-            <Home
-              posts={posts}
-              newLimit={newLimit}
-              maxLimit={maxLimit}
-              limit={limit}
-            />
+            <Home posts={posts} maxLimit={maxLimit} fetchPosts={fetchPosts} />
           }
         />
         <Route

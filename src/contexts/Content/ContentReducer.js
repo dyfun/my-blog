@@ -15,11 +15,6 @@ export const ContentReducer = (state, action) => {
               ...state,
               maxLimit: action.maxLimit,
             };
-        /*case "SET_POST":
-          return {
-            ...state,
-            selectedPost: state.posts.filter(post => post.slug === action.selectedPost)[0],
-          };*/
       default:
         break;
     }

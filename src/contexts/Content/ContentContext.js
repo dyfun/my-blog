@@ -1,4 +1,4 @@
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useEffect, useReducer } from "react";
 import { ContentReducer } from "./ContentReducer";
 import axios from "axios";
 
@@ -14,21 +14,13 @@ const ContentContextProvider = ({ children }) => {
 
   const fetchPosts = async (limit) => {
     try {
-      if (!state.maxLimit) {
-        const posts = await axios.get("https://tayfunguler.org/api/posts/1");
-        dispatch({
-          type: "MAX_LIMIT",
-          maxLimit: posts.data.length,
-        });
-      } else {
-        const posts = await axios.get(
-          "https://tayfunguler.org/api/posts/" + limit
-        );
-        dispatch({
-          type: "GET_POSTS",
-          posts: posts.data,
-        });
-      }
+      const posts = await axios.get(
+        "https://tayfunguler.org/api/posts/" + limit
+      );
+      dispatch({
+        type: "GET_POSTS",
+        posts: posts.data,
+      });
     } catch (error) {
       console.log(error.message);
     }
@@ -37,7 +29,6 @@ const ContentContextProvider = ({ children }) => {
   const fetchPost = async (slug) => {
     try {
       const post = await axios.get("https://tayfunguler.org/api/post/" + slug);
-
       dispatch({
         type: "GET_POST",
         post: post.data,
@@ -47,15 +38,24 @@ const ContentContextProvider = ({ children }) => {
     }
   };
 
-  /*const setPost = (id) => {
-    dispatch({ type: "SET_POST", selectedPost: id });
+  const fetchMaxLimit = async () => {
+    try {
+      const posts = await axios.get("https://tayfunguler.org/api/posts/1");
+      dispatch({
+        type: "MAX_LIMIT",
+        maxLimit: posts.data.length,
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  let status = false;
-  if (state.posts) {
-    status = true;
-  }
-  useEffect(() => fetchPosts(), []);*/
+  useEffect(() => {
+    if (!state.maxLimit) {
+      fetchMaxLimit();
+      fetchPosts(4);
+    }
+  });
 
   return (
     <ContentContext.Provider
@@ -65,8 +65,6 @@ const ContentContextProvider = ({ children }) => {
         maxLimit: state.maxLimit,
         fetchPosts,
         fetchPost,
-        //selectedPost: state.selectedPost,
-        //setPost,
       }}
     >
       {children}
